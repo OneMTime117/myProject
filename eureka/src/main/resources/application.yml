@@ -1,0 +1,19 @@
+server:
+  port: 7001
+spring:
+  application:
+    name: eureka
+
+eureka:
+  client:
+    #作为客户端，不进行服务注册、服务发现
+    register-with-eureka: false
+    fetch-registry: false
+    #服务端访问地址
+    service-url:
+      defalutZone: http://${eureka.instance.hostname}:${server.port}/eureka
+
+  instance:
+    hostname: localhost
+
+
