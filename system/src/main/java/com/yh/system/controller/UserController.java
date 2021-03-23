@@ -16,6 +16,7 @@ public class UserController {
 
 	@PostMapping("/login")
 	public R login(String id){
+		userService.mybatisCommonMethods();
 		switch (id) {
 			case "1":
 				return R.ok();

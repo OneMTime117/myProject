@@ -39,6 +39,8 @@
             <artifactId>hutool-all</artifactId>
             <version>5.5.9</version>
         </dependency>
+
+        <!-- lombok工具包-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
