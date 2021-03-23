@@ -4,6 +4,10 @@ spring:
   application:
     name: system
 
+
+
+
+
 eureka:
   client:
     #作为客户端，不进行服务注册、服务发现
@@ -11,7 +15,6 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://localhost:7001/eureka
-
   #暴露ip地址
   instance:
     prefer-ip-address: true
