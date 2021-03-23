@@ -27,12 +27,21 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- hutool工具包，提供常用封装好的工具api-->
+        <!-- mybatis-plus,引入mybaits、mybatis-spring、spring-jdbc、HikariCP连接池-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.4.2</version>
+        </dependency>
+
+        <!-- hutool工具包，提供常用封装好的工具api -->
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
             <version>5.5.9</version>
         </dependency>
+
+
     </dependencies>
 
 </project>
