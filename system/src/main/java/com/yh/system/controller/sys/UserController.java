@@ -1,4 +1,4 @@
-package com.yh.system.controller;
+package com.yh.system.controller.sys;
 
 import com.yh.system.config.mvc.R;
 import com.yh.system.service.UserService;
