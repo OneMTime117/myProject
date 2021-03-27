@@ -1,6 +1,6 @@
 package com.yh.system.controller.sys;
 
-import com.yh.system.config.mvc.R;
+import com.yh.system.config.mvc.Result;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,7 +11,7 @@ public class UserController {
 
 
 	@PostMapping("/login")
-	public R login(String id){
+	public Result login(String id) {
 		return null;
 	}
 }
