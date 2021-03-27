@@ -1,0 +1,33 @@
+server:
+  port: 8001
+spring:
+  application:
+    name: system
+
+  #数据源、连接池配置
+  datasource:
+    url: jdbc:mysql://47.111.141.110:3306/myProject?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+
+eureka:
+  client:
+    #作为客户端，不进行服务注册、服务发现
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+  #暴露ip地址
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+
+
+
+
+
+
+
+
