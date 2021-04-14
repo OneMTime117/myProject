@@ -12,6 +12,8 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 
+
+
 eureka:
   client:
     #作为客户端，不进行服务注册、服务发现
@@ -25,6 +27,11 @@ eureka:
     ip-address: 127.0.0.1
 
 
+#mybatis配置
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#logback
 
 
 

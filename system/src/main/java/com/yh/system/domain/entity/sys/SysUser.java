@@ -4,12 +4,12 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.yh.common.domain.entity.BaseEntity;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.time.LocalDate;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @TableName(value = "sys_user")
 public class SysUser extends BaseEntity {
 	/**

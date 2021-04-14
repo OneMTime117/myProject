@@ -43,7 +43,7 @@ public class BaseEntity {
 	 * 逻辑删除 0否，1是
 	 */
 	@TableField(value = "deleted")
-	private Integer deleted;
+	private Boolean deleted;
 
 	public static final String COL_ID = "id";
 
