@@ -12,5 +12,4 @@ public enum YesOrNotEnum {
 
     private String code;
     private String msg;
-
 }

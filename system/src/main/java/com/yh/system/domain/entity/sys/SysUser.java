@@ -3,6 +3,7 @@ package com.yh.system.domain.entity.sys;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.yh.common.domain.entity.BaseEntity;
+import com.yh.system.domain.enums.SexEnum;
 import lombok.Data;
 import lombok.ToString;
 
@@ -48,11 +49,13 @@ public class SysUser extends BaseEntity {
 	@TableField(value = "open_id")
 	private String openId;
 
-	/**
-	 * 性别 0未知 1男 2女
-	 */
-	@TableField(value = "sex")
-	private Integer sex;
+	//	/**
+//	 * 性别 0未知 1男 2女
+//	 */
+//	@TableField(value = "sex")
+//	private Integer sex;
+	//使用通用枚举
+	private SexEnum sex;
 
 	/**
 	 * 生日

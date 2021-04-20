@@ -1,9 +1,14 @@
 package com.yh.system;
 
 
-import cn.hutool.core.util.IdUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.yh.system.domain.dto.user.QueryUserInfoDTO;
+import com.yh.system.domain.dto.user.UserInfoDTO;
 import com.yh.system.domain.entity.sys.SysUser;
 import com.yh.system.mapper.sys.SysUserMapper;
 import com.yh.system.service.sys.SysUserService;
@@ -28,11 +33,21 @@ public class SystemTest {
 	private SysUserMapper sysUserMapper;
 	@Autowired
 	private SysUserService sysUserService;
+	@Autowired
+	private ObjectMapper objectMapper;
 
 	@Test
 	public void sysUserMapperTest() {
-		String s = IdUtil.simpleUUID();
-		System.out.println(s);
+		Page<?> page = new Page();
+		page.setCurrent(1);
+		page.setSize(1);
+		QueryUserInfoDTO queryUserInfoDTO = new QueryUserInfoDTO();
+		queryUserInfoDTO.setUsernameSearch("yh");
+		IPage<UserInfoDTO> userInfoDTOIPage = sysUserMapper.pageUserInfoDTO(page, queryUserInfoDTO);
+		userInfoDTOIPage.getRecords().forEach(action -> {
+					System.out.println(action);
+				}
+		);
 	}
 
 	@Test
@@ -50,5 +65,13 @@ public class SystemTest {
 		sysUser.setUsername("yh");
 		sysUser.setPassword("1233444");
 		sysUserService.saveOrUpdate(sysUser, sw);
+	}
+
+	@Test
+	public void insertSysUserMapperTest() throws JsonProcessingException {
+		SysUser sysUser = sysUserMapper.selectById("1");
+		String value = sysUser.getSex().getCode();
+		String s = objectMapper.writeValueAsString(sysUser);
+		System.out.println(s);
 	}
 }
