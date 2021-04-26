@@ -1,5 +1,6 @@
 server:
   port: 8001
+
 spring:
   application:
     name: system
@@ -29,14 +30,18 @@ eureka:
 
 #mybatis配置
 mybatis-plus:
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  #  configuration:
+  #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   type-enums-package: com.yh.system.domain.enums
 
+
 #logback
+logging:
+  level:
+    com.yh.system.mapper: debug
 
-
-
+#swagger开启
+swagger.enabled: true
 
 
 

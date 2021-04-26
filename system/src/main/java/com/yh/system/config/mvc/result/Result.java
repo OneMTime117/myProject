@@ -1,7 +1,13 @@
-package com.yh.system.config.mvc;
+package com.yh.system.config.mvc.result;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
+
+/**
+ * @author yuanhuan
+ * @description: @responseBody请求响应的结果集
+ * @date 2021/4/21 16:58
+ */
 
 @Getter
 public class Result {

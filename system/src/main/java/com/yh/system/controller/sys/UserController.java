@@ -1,7 +1,7 @@
 package com.yh.system.controller.sys;
 
 import cn.hutool.crypto.SecureUtil;
-import com.yh.system.config.mvc.Result;
+import com.yh.system.config.mvc.result.Result;
 import com.yh.system.domain.dto.user.TimeDTO;
 import com.yh.system.domain.dto.user.UserInfoDTO;
 import com.yh.system.domain.dto.user.UserLoginDTO;
@@ -65,8 +65,15 @@ public class UserController {
 	@GetMapping("get")
 	public Result get(@RequestParam SexEnum sex) {
 		System.out.println(sex);
+
 		SysUser byId = sysUserService.getById("1");
 		return Result.ok(byId);
+	}
+
+	@GetMapping("servlet")
+	public Result servlet() {
+
+		return Result.ok();
 	}
 
 }

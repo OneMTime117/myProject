@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
 @EnableEurekaClient
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.yh")//保证common包下的Bean被扫描
 @MapperScan(basePackages = {"com.yh.system.mapper"})
 @EnableTransactionManagement
 public class SystemApplication {

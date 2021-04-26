@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
@@ -73,7 +74,7 @@ public class JacksonConfig {
 		objectMapper.registerModule(simpleModule);
 
 		//枚举序列化使用toString方法
-//		objectMapper.configure(SerializationFeature.WRITE_ENUMS_USING_TO_STRING,true);
+		objectMapper.configure(SerializationFeature.WRITE_ENUMS_USING_TO_STRING, true);
 		return objectMapper;
 	}
 

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SysBaseServiceImpl extends ServiceImpl<SysBaseMapper, SysBase> implements SysBaseService {
 
+
 }
 
 

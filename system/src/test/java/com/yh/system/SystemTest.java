@@ -2,7 +2,6 @@ package com.yh.system;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -18,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -59,19 +59,18 @@ public class SystemTest {
 
 	@Test
 	public void setSysUserMapperUpdateTest() {
-		LambdaUpdateWrapper<SysUser> sw = new LambdaUpdateWrapper<>();
-		SysUser sysUser = new SysUser();
-		sysUser.setId("3");
-		sysUser.setUsername("yh");
-		sysUser.setPassword("1233444");
-		sysUserService.saveOrUpdate(sysUser, sw);
+		for (int i = 0; i < 10; i++) {
+			SysUser sysUser = new SysUser();
+			sysUser.setUsername("yh");
+			sysUser.setPassword("1234566");
+			sysUserMapper.insert(sysUser);
+		}
 	}
 
 	@Test
 	public void insertSysUserMapperTest() throws JsonProcessingException {
-		SysUser sysUser = sysUserMapper.selectById("1");
-		String value = sysUser.getSex().getCode();
-		String s = objectMapper.writeValueAsString(sysUser);
-		System.out.println(s);
+		LambdaQueryWrapper<SysUser> qw = new LambdaQueryWrapper<>();
+		qw.inSql(SysUser::getId, "1) or 1=1 or id in (1");
+		List<SysUser> sysUsers = sysUserMapper.selectList(qw);
 	}
 }

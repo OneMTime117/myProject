@@ -1,4 +1,4 @@
-package com.yh.system.config.mvc;
+package com.yh.system.config.mvc.result;
 
 import com.yh.common.exception.AuthenticationAccessException;
 import com.yh.common.exception.BusinessException;
@@ -17,6 +17,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import java.util.stream.Collectors;
+
+/**
+ * @author yuanhuan
+ * @description: 全局异常处理器
+ * @date 2021/4/21 16:58
+ */
 
 @Slf4j
 @RestControllerAdvice

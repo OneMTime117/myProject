@@ -11,7 +11,7 @@ import java.time.LocalDate;
 
 @Data
 @ToString(callSuper = true)
-@TableName(value = "sys_user")
+@TableName(value = "sys_user", autoResultMap = true)
 public class SysUser extends BaseEntity {
 	/**
 	 * 用户名
@@ -43,6 +43,7 @@ public class SysUser extends BaseEntity {
 	@TableField(value = "email")
 	private String email;
 
+
 	/**
 	 * 微信账号openId
 	 */
@@ -62,6 +63,7 @@ public class SysUser extends BaseEntity {
 	 */
 	@TableField(value = "birthday")
 	private LocalDate birthday;
+
 
 	public static final String COL_USERNAME = "username";
 

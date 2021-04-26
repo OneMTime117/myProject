@@ -1,4 +1,4 @@
-package com.yh.system.config.mvc;
+package com.yh.system.config.mvc.converter;
 
 import cn.hutool.core.date.DateUtil;
 import com.yh.system.domain.enums.SexEnum;
@@ -12,6 +12,12 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Objects;
+
+/**
+ * @author yuanhuan
+ * @description: 时间日期类型转换器注册
+ * @date 2021/4/21 17:02
+ */
 
 @Configuration
 public class DateTimeConverter {

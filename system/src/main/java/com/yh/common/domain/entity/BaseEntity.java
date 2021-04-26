@@ -1,5 +1,6 @@
 package com.yh.common.domain.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -18,25 +19,25 @@ public class BaseEntity {
 	/**
 	 * 创建人
 	 */
-	@TableField(value = "created_by")
+	@TableField(value = "created_by", fill = FieldFill.INSERT)
 	private String createdBy;
 
 	/**
 	 * 最后修改人
 	 */
-	@TableField(value = "last_modified_by")
+	@TableField(value = "last_modified_by", fill = FieldFill.UPDATE)
 	private String lastModifiedBy;
 
 	/**
 	 * 创建时间
 	 */
-	@TableField(value = "created_date")
+	@TableField(value = "created_date", fill = FieldFill.INSERT)
 	private LocalDateTime createdDate;
 
 	/**
 	 * 最后修改时间
 	 */
-	@TableField(value = "last_modified_date")
+	@TableField(value = "last_modified_date", fill = FieldFill.UPDATE)
 	private LocalDateTime lastModifiedDate;
 
 	/**
