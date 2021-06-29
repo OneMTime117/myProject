@@ -30,10 +30,7 @@ eureka:
 
 #mybatis配置
 mybatis-plus:
-  #  configuration:
-  #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   type-enums-package: com.yh.system.domain.enums
-
 
 #logback
 logging:
