@@ -6,7 +6,7 @@ import lombok.Data;
 
 @ApiModel(description = "演示内部dto")
 @Data
-public class InnerDemoDTO {
+public class SwaggerInnerDemoDTO {
 
 	@ApiModelProperty("id")
 	private String id;

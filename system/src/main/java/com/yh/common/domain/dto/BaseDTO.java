@@ -3,10 +3,12 @@ package com.yh.common.domain.dto;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
+@ApiModel
 @Data
 public class BaseDTO {
 	/**

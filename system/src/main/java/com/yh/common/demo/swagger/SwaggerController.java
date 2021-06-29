@@ -12,17 +12,17 @@ import java.time.LocalDateTime;
 @Api(tags = "swagger文档接口demo")
 @RestController
 @RequestMapping("/demo/swagger")
-public class DemoController {
+public class SwaggerController {
 
 	@GetMapping("/demo1")
-	@ApiOperation(value = "示例1", response = DemoDTO.class)
+	@ApiOperation(value = "示例1", response = SwaggerDemoDTO.class)
 	@ApiImplicitParams({
 			@ApiImplicitParam(name = "name", value = "姓名", required = true, paramType = "query"),
 			@ApiImplicitParam(name = "password", value = "密码", required = true, paramType = "query"),
 			@ApiImplicitParam(name = "time", value = "时间", required = false, paramType = "query")
 	})
 	public Result demoResult(@RequestParam String name, @RequestParam String password, LocalDateTime time) {
-		DemoDTO dto = new DemoDTO();
+		SwaggerDemoDTO dto = new SwaggerDemoDTO();
 		dto.setName(name);
 		dto.setPassword(password);
 		dto.setTime(time);
@@ -31,7 +31,7 @@ public class DemoController {
 
 	@PostMapping("/demo2")
 	@ApiOperation("示例2")
-	public DemoDTO demoDemoDTO(@RequestBody DemoDTO dto) {
+	public SwaggerDemoDTO demoDemoDTO(@RequestBody SwaggerDemoDTO dto) {
 		return dto;
 	}
 }

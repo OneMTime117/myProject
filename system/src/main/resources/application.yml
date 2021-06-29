@@ -15,6 +15,7 @@ spring:
 
 
 
+
 eureka:
   client:
     #作为客户端，不进行服务注册、服务发现
