@@ -1,6 +1,7 @@
 package com.yh.system.config.mvc;
 
 import cn.hutool.core.util.StrUtil;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -52,6 +53,7 @@ public class JacksonConfig {
 		objectMapper.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
 		//指定date类型的序列化与反序列化处理
 		objectMapper.setDateFormat(new SimpleDateFormat(DEFAULT_DATE_TIME_FORMAT));
+
 
 		//支持JDK8的日期时间类型的序列化与反序列化处理
 		JavaTimeModule javaTimeModule = new JavaTimeModule();

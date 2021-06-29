@@ -5,8 +5,8 @@ import com.yh.common.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.core.annotation.AnnotationUtils;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.validation.BindException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
@@ -33,8 +33,7 @@ public class GlobalExceptionHandler {
 	/**
 	 * 请求方式不支持
 	 */
-	@ExceptionHandler({HttpRequestMethodNotSupportedException.class})
-	@ResponseStatus(code = HttpStatus.METHOD_NOT_ALLOWED)
+	@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
 	public Result handleException(HttpRequestMethodNotSupportedException e) {
 		log.error(e.getMessage(), e);
 		return Result.error("不支持' " + e.getMethod() + "'请求");
@@ -78,21 +77,30 @@ public class GlobalExceptionHandler {
 
 	// BeanValidation参数校验异常
 	/*
-	 * @RequestBody 参数校验异常
+	 * @RequestBody Bean约束校验异常
 	 *
 	 */
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public Result handleMethodArgumentNotValid(MethodArgumentNotValidException e) {
-		String message = e.getBindingResult().getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining());
+		String message = e.getBindingResult().getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining(","));
 		return Result.error(message);
 	}
 
 	/*
-	 * @RequestParam 参数校验异常
+	 * @ModelAttribute Bean约束校验异常
+	 */
+	@ExceptionHandler(BindException.class)
+	public Result handleBind(BindException e) {
+		String message = e.getBindingResult().getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining(","));
+		return Result.error(message);
+	}
+
+	/*
+	 * @RequestParam/@PathVariable 方法参数约束校验异常
 	 */
 	@ExceptionHandler(ConstraintViolationException.class)
 	public Result handleConstraintViolation(ConstraintViolationException e) {
-		String message = e.getConstraintViolations().stream().map(ConstraintViolation::getMessage).collect(Collectors.joining());
+		String message = e.getConstraintViolations().stream().map(ConstraintViolation::getMessage).collect(Collectors.joining(","));
 		return Result.error(message);
 	}
 
@@ -117,12 +125,5 @@ public class GlobalExceptionHandler {
 		return Result.error("服务器错误，请联系管理员");
 	}
 
-//	/*
-//	 * 处理Get请求中 使用@Valid 验证路径中请求实体校验失败后抛出的异常
-//	 */
-//	@ExceptionHandler(BindException.class)
-//	public Result handleBind(BindException e) {
-//		String message = e.getBindingResult().getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining());
-//		return Result.error(message);
-//	}
+
 }

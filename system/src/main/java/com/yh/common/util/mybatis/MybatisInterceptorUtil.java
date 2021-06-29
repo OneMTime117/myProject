@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 /**
  * @author yuanhuan
- * @description: mybatis拦截器工具类，用于封装mybatis核心对象的手动创建
+ * @description: mybatis拦截器工具类，用于封装mybatis核心对象的相关创建代码
  * @date 2021/4/22 17:18
  */
 

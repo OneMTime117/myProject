@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 @ApiModel(description = "演示dto")
-public class DemoDTO {
+public class SwaggerDemoDTO {
 
 	@ApiModelProperty(value = "名字", required = true)
 	private String name;
@@ -21,8 +21,8 @@ public class DemoDTO {
 	private LocalDateTime time;
 
 	@ApiModelProperty("单个inner")
-	private InnerDemoDTO inner;
+	private SwaggerInnerDemoDTO inner;
 
 	@ApiModelProperty("inner集合")
-	private List<InnerDemoDTO> innerDemoDTOList;
+	private List<SwaggerInnerDemoDTO> swaggerInnerDemoDTOList;
 }
