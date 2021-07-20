@@ -7,14 +7,17 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.yh.common.demo.jackson.JsonDemoDTO;
 import com.yh.common.demo.validator.BeanValidatorDemoDTO;
-import com.yh.common.util.json.JacksonUtil;
-import com.yh.common.util.spring.MessageUtil;
 import com.yh.system.domain.dto.user.QueryUserInfoDTO;
 import com.yh.system.domain.dto.user.UserInfoDTO;
+import com.yh.system.domain.dto.user.UserRoleDTO;
+import com.yh.system.domain.entity.sys.SysRole;
 import com.yh.system.domain.entity.sys.SysUser;
+import com.yh.system.domain.entity.sys.SysUserRole;
+import com.yh.system.mapper.sys.SysRoleMapper;
 import com.yh.system.mapper.sys.SysUserMapper;
+import com.yh.system.mapper.sys.SysUserRoleMapper;
+import com.yh.system.service.sys.SysUserRoleService;
 import com.yh.system.service.sys.SysUserService;
 import org.hibernate.validator.HibernateValidator;
 import org.junit.Test;
@@ -46,6 +49,35 @@ public class SystemTest {
 	private SysUserService sysUserService;
 	@Autowired
 	private ObjectMapper objectMapper;
+	@Autowired
+	private SysRoleMapper sysRoleMapper;
+	@Autowired
+	private SysUserRoleMapper sysUserRoleMapper;
+	@Autowired
+	private SysUserRoleService sysUserRoleService;
+
+
+	@Test
+	public void sysRoleTest() {
+		SysRole sysRole = new SysRole();
+		sysRole.setRoleName("角色2");
+		sysRoleMapper.insert(sysRole);
+	}
+
+	@Test
+	public void bindRole() {
+		SysUser sysUser = sysUserMapper.selectOne(new LambdaQueryWrapper<SysUser>()
+				.eq(SysUser::getUsername, "yh1"));
+		List<SysRole> sysRoles = sysRoleMapper.selectList(null);
+		ArrayList<SysUserRole> sysUserRoles = new ArrayList<>();
+		for (SysRole sysRole : sysRoles) {
+			SysUserRole sysUserRole = new SysUserRole();
+			sysUserRole.setUserId(sysUser.getId());
+			sysUserRole.setRoleId(sysRole.getId());
+			sysUserRoles.add(sysUserRole);
+		}
+		sysUserRoleService.saveBatch(sysUserRoles);
+	}
 
 	@Test
 	public void sysUserMapperTest() {
@@ -59,6 +91,12 @@ public class SystemTest {
 					System.out.println(action);
 				}
 		);
+	}
+
+	@Test
+	public void SysUserTest() {
+		List<UserRoleDTO> yh1 = sysUserMapper.listUserRole("yh1");
+		yh1.forEach(action -> System.out.println(action.toString()));
 	}
 
 	@Test

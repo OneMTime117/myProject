@@ -33,4 +33,19 @@
             and phone = #{dto.phone}
         </if>
     </select>
+
+
+    <resultMap id ="userRole" type="com.yh.system.domain.dto.user.UserRoleDTO" autoMapping="true">
+           <collection property="sysRoles"  ofType="com.yh.system.domain.entity.sys.SysRole">
+                <result property="id" column="t2.id" />
+                <result property="roleName" column="role_name" />
+           </collection>
+    </resultMap>
+    <select id="listUserRole" resultMap="userRole">
+        SELECT t1.*,t2.*
+        FROM sys_user t1
+        LEFT JOIN sys_user_role t3 ON t3.user_id=t1.id
+        LEFT JOIN sys_role t2 ON t3.role_id=t2.id
+        WHERE t1.username=#{username}
+</select>
 </mapper>

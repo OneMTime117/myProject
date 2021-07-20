@@ -1,10 +1,11 @@
 package com.yh.common.demo.swagger;
 
-import com.yh.system.config.mvc.result.Result;
+import com.yh.system.config.result.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -21,7 +22,7 @@ public class SwaggerController {
 			@ApiImplicitParam(name = "password", value = "密码", required = true, paramType = "query"),
 			@ApiImplicitParam(name = "time", value = "时间", required = false, paramType = "query")
 	})
-	public Result demoResult(@RequestParam String name, @RequestParam String password, LocalDateTime time) {
+	public ResponseEntity demoResult(@RequestParam String name, @RequestParam String password, LocalDateTime time) {
 		SwaggerDemoDTO dto = new SwaggerDemoDTO();
 		dto.setName(name);
 		dto.setPassword(password);

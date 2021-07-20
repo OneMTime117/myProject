@@ -45,4 +45,9 @@ public class JacksonUtil {
 		return OBJECT_MAPPER.writeValueAsString(list);
 	}
 
+	//将被Jackson处理得到的Object对象，转化为实体类
+	public static <T> T objectToBean(Object obj, Class<T> clazz) {
+		return OBJECT_MAPPER.convertValue(obj, clazz);
+	}
+
 }

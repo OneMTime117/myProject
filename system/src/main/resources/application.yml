@@ -1,5 +1,7 @@
 server:
   port: 8001
+  servlet:
+    context-path: /system
 
 spring:
   application:
@@ -11,9 +13,9 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
-
-
-
+  redis:
+    host: 47.111.141.110
+    port: 6379
 
 
 eureka:
@@ -29,7 +31,7 @@ eureka:
     ip-address: 127.0.0.1
 
 
-#mybatis配置
+#mybatisPlus配置
 mybatis-plus:
   type-enums-package: com.yh.system.domain.enums
 
@@ -38,8 +40,18 @@ logging:
   level:
     com.yh.system.mapper: debug
 
-#swagger开启
-swagger.enabled: true
+#swagger是否开启
+swagger:
+  enabled: true
+
+##springboot任务模块是否开启
+scheduling:
+  enabled: false
+
+#文件服务器
+fileUpload:
+  domain: http://localhost:80/download/
+  dir: D://data/
 
 
 
