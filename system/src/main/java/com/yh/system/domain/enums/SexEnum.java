@@ -13,8 +13,8 @@ public enum SexEnum implements IEnum<String> {
 	WOMAN("2", "女");
 
 
-	private String code;
-	private String msg;
+	private final String code;
+	private final String msg;
 
 	//作为数据库字段的数据
 	@Override

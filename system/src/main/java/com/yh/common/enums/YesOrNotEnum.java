@@ -10,6 +10,7 @@ public enum YesOrNotEnum {
     YES("Y","是"),
     NO("N","否");
 
-    private String code;
-    private String msg;
+    private final String code;
+    private final String msg;
+
 }

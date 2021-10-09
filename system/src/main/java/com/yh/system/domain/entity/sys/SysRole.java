@@ -6,6 +6,8 @@ import com.yh.common.domain.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.Optional;
+
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName(value = "sys_role")
@@ -21,4 +23,6 @@ public class SysRole extends BaseEntity {
 	 */
 	@TableField(value = "description")
 	private String description;
+
+	private Optional<String> name;
 }

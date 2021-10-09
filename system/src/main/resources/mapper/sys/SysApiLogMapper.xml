@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yh.system.mapper.sys.SysApiLogMapper">
+  <resultMap id="BaseResultMap" type="com.yh.system.domain.entity.sys.SysApiLog">
+    <!--@mbg.generated-->
+    <!--@Table sys_api_log-->
+    <result column="api_name" jdbcType="VARCHAR" property="apiName" />
+    <result column="api_url" jdbcType="VARCHAR" property="apiUrl" />
+    <result column="api_method" jdbcType="VARCHAR" property="apiMethod" />
+    <result column="api_controller_name" jdbcType="VARCHAR" property="apiControllerName" />
+    <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+    <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="id" jdbcType="VARCHAR" property="id" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    api_name, api_url, api_method, api_controller_name, created_by, created_date, id
+  </sql>
+</mapper>

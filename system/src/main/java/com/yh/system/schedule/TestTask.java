@@ -1,6 +1,7 @@
 package com.yh.system.schedule;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TestTask {
 
+	@Async
 	@Scheduled(initialDelay = 1000 * 60, fixedDelay = 1000 * 60 * 5)
 	public void task() {
 		log.info("test任务-开始执行");

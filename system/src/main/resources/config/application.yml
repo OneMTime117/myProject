@@ -1,0 +1,39 @@
+server:
+  port: 8001
+  servlet:
+    context-path: /system
+
+spring:
+  application:
+    name: system
+  profiles:
+    active: dev
+  servlet:
+    multipart:
+      max-request-size: 1024MB
+      max-file-size: 1024MB
+
+eureka:
+  client:
+    #作为客户端，不进行服务注册、服务发现
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+  #暴露ip地址
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+
+#mybatisPlus配置
+mybatis-plus:
+  type-enums-package: com.yh.system.domain.enums
+
+
+
+
+
+
+
+
+

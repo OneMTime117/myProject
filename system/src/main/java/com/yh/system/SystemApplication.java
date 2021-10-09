@@ -3,10 +3,12 @@ package com.yh.system;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
+@ServletComponentScan("com.yh")
 @EnableEurekaClient
 @SpringBootApplication(scanBasePackages = "com.yh")//保证common包下的Bean被扫描
 @MapperScan(basePackages = {"com.yh.system.mapper"})

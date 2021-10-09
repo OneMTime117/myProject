@@ -1,6 +1,8 @@
 package com.yh.system;
 
 
+import cn.hutool.poi.excel.ExcelUtil;
+import cn.hutool.poi.excel.ExcelWriter;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -19,12 +21,14 @@ import com.yh.system.mapper.sys.SysUserMapper;
 import com.yh.system.mapper.sys.SysUserRoleMapper;
 import com.yh.system.service.sys.SysUserRoleService;
 import com.yh.system.service.sys.SysUserService;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.HibernateValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.client.RestTemplate;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -39,6 +43,7 @@ import java.util.*;
  * @description:
  * @date 2021/3/21 18:38
  */
+@Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class SystemTest {
@@ -56,12 +61,56 @@ public class SystemTest {
 	@Autowired
 	private SysUserRoleService sysUserRoleService;
 
+	@Autowired
+	private RestTemplate restTemplate;
+
+
+	@Test
+	public void testA(){
+		Objects.requireNonNull(null,"sss");
+	}
+
+	@Test
+	public void test() {
+//		List<SysRole> sysRoles = sysRoleMapper.selectList(null);
+//		sysRoles.stream().forEach(action->{
+//			System.out.println(action);
+//		});
+		ArrayList<String> listRole = new ArrayList<>();
+		listRole.add("角色1");
+		listRole.add("角色2");
+		int 角色1 = sysRoleMapper.update(null, new LambdaUpdateWrapper<SysRole>().set(SysRole::getDescription, "1119")
+				.in(SysRole::getRoleName, listRole));
+		List<SysRole> sysRoles = sysRoleMapper.selectList(null);
+		sysRoles.stream().forEach(action -> {
+			System.out.println(action);
+		});
+	}
+
+	@Test
+	public void http() {
+//		String hh = restTemplate.getForObject("http://58.49.165.10:8888/mobile_annotationtool/getAssessInfoOfTime", String.class);
+//		System.out.println(hh);
+//		String hh1 = restTemplate.getForObject("http://58.49.165.10:8888/mobile_annotationtool/updateAssessInfoOfTime?days=7", String.class);
+//		System.out.println(hh1);
+//		String hh3 = restTemplate.getForObject("http://58.49.165.10:8888/mobile_annotationtool/getAssessInfoOfTime", String.class);
+//		System.out.println(hh3);
+
+
+		String hh = restTemplate.getForObject("http://localhost:8888/mobile_annotationtool/getAssessInfoOfTime", String.class);
+		System.out.println(hh);
+		String hh1 = restTemplate.getForObject("http://localhost:8888/mobile_annotationtool/updateAssessInfoOfTime?days=30", String.class);
+		System.out.println(hh1);
+		String hh3 = restTemplate.getForObject("http://localhost:8888/mobile_annotationtool/getAssessInfoOfTime", String.class);
+		System.out.println(hh3);
+	}
+
 
 	@Test
 	public void sysRoleTest() {
-		SysRole sysRole = new SysRole();
-		sysRole.setRoleName("角色2");
-		sysRoleMapper.insert(sysRole);
+		ExcelWriter writer = ExcelUtil.getWriter();
+
+
 	}
 
 	@Test
@@ -164,12 +213,12 @@ public class SystemTest {
 
 	@Test
 	public void Test() throws JsonProcessingException {
-		String [] ids = {"03e3e28d8636b348c61f4a0ac53a15c7","06def0d55a80c70a288bfc91b5c37faa"};
+		String[] ids = {"03e3e28d8636b348c61f4a0ac53a15c7", "06def0d55a80c70a288bfc91b5c37faa"};
 		ArrayList<String> list = new ArrayList<>();
 		list.addAll(Arrays.asList(ids));
 		LambdaUpdateWrapper<SysUser> uw = new LambdaUpdateWrapper<SysUser>()
 				.set(SysUser::getNickName, "hahha")
 				.in(SysUser::getId, list);
-		sysUserMapper.update(null,uw);
+		sysUserMapper.update(null, uw);
 	}
 }

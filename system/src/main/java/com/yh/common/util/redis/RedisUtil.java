@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -32,7 +33,7 @@ public class RedisUtil {
 	private ValueOperations<String, Object> valueOperations;
 
 	//单位默认使用 s,默认1天
-	public static final long DEFAULT_TIME_OUT = 24 * 60 * 10 * 1000;
+	public static final long DEFAULT_TIME_OUT = 24 * 60 * 10;
 
 	public static final long NOT_TIME_OUT = -1;
 
@@ -73,12 +74,25 @@ public class RedisUtil {
 	}
 
 	/**
-	 * 获取hash值
+	 * 获取hash所有值
 	 */
 	public <T> Map<String, T> getAllHashObject(String key, Class<T> clazz) throws IOException {
 		HashMap<String, T> hashMap = new HashMap<>();
 		hashOperations.putAll(key, hashMap);
 		return hashMap;
+	}
+
+	/**
+	 * 获取hash值,指定泛型,转为List集合
+	 */
+	public <T> List<T> getHashObjectList(String key, Class<T> clazz) throws IOException {
+		Object o = valueOperations.get(key);
+		//object为json序列化的字符串,需要进一步反序列化为对象
+		if (null == o) {
+			return null;
+		}
+		String jsonStr = JacksonUtil.toJsonStr(o);
+		return JacksonUtil.toList(jsonStr, clazz);
 	}
 
 	/**
@@ -110,5 +124,34 @@ public class RedisUtil {
 			return null;
 		}
 		return JacksonUtil.objectToBean(o, clazz);
+	}
+
+	/**
+	 * 获取value值,指定泛型,转为List集合
+	 */
+	public <T> List<T> getObjectList(String key, Class<T> clazz) throws IOException {
+		Object o = valueOperations.get(key);
+		//object为json序列化的字符串,需要进一步反序列化为对象
+		if (null == o) {
+			return null;
+		}
+		String jsonStr = JacksonUtil.toJsonStr(o);
+		return JacksonUtil.toList(jsonStr, clazz);
+	}
+
+
+	/**
+	 * 更新value的过期时间
+	 */
+	public void expireObject(String key) {
+		redisTemplate.expire(key, DEFAULT_TIME_OUT, TimeUnit.SECONDS);
+	}
+
+
+	/**
+	 * 更新value的过期时间
+	 */
+	public void expireObject(String key,long timeout) {
+		redisTemplate.expire(key, timeout, TimeUnit.SECONDS);
 	}
 }

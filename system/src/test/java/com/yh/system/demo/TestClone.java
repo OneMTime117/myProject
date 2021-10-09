@@ -1,5 +1,6 @@
 package com.yh.system.demo;
 
+import com.yh.system.domain.dto.user.UserInfoDTO;
 import lombok.Data;
 
 @Data
@@ -7,6 +8,8 @@ public class TestClone implements Cloneable {
 
 	private String name;
 	private String sex;
+	private final UserInfoDTO userInfoDTO = null;
+
 
 	@Override
 	protected Object clone() throws CloneNotSupportedException {

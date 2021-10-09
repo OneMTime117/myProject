@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<configuration scan="true" scanPriod="60 seconds" debug="false">
+    <!--引入springboot提供了关键字解析器-->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <property name="LOG_FILE_MAX_HISTORY" value="30 day"/>
+    <property name="LOG_FILE_PATH" value="D://log"/>
+    <property name="PROJECT_NAME" value="system"/>
+    <!--时间、日志级别、PID、线程、日志名(日志创建使用的class全类名)、msg-->
+    <property name="LOG_CONSOLE_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %clr(%-5level){green} %clr(${PID:- }){magenta} --- [%15thread]  %clr(%-50logger{49}){cyan} : %msg%n"/>
+    <property name="LOG_FILE_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level ${PID:- } --- [%15thread]  %-50logger{49} : %msg%n"/>
+
+    <!--输出控制台-->
+    <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_CONSOLE_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!--输出到文件,info-->
+    <appender name="infoFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 滚动策略，log.filePathTimeBasedRollingPolicy,每天生成一个文件，指定文件名、文件保存时间 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE_PATH}/${PROJECT_NAME}/info/${PROJECT_NAME}_info_%d.log}</fileNamePattern>
+            <maxHistory>${LOG_FILE_MAX_HISTORY}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${LOG_FILE_PATTERN}</pattern>
+        </encoder>
+        <!-- 过滤打印指定级别日志 -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+    </appender>
+
+    <!--输出到文件,warn-->
+    <appender name="warnFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE_PATH}/${PROJECT_NAME}/warn/${PROJECT_NAME}_warn_%d.log}</fileNamePattern>
+            <maxHistory>${LOG_FILE_MAX_HISTORY}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${LOG_FILE_PATTERN}</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+    </appender>
+
+    <!--输出到文件,error-->
+    <appender name="errorFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE_PATH}/${PROJECT_NAME}/error/${PROJECT_NAME}_error_%d.log}</fileNamePattern>
+            <maxHistory>${LOG_FILE_MAX_HISTORY}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${LOG_FILE_PATTERN}</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+    </appender>
+
+
+    <!--全局日志级别为info,当springboot中指定额外的logger时，默认继承root所有组件-->
+    <springProfile name="dev,test">
+        <root level="info">
+            <appender-ref ref="consoleAppender"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="prod">
+        <root level="info">
+            <appender-ref ref="consoleAppender"/>
+            <appender-ref ref="infoFileAppender"/>
+            <appender-ref ref="warnFileAppender"/>
+            <appender-ref ref="errorFileAppender"/>
+        </root>
+    </springProfile>
+</configuration>
