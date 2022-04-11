@@ -17,6 +17,8 @@ import java.util.concurrent.TimeUnit;
  * @author yuanhuan
  * @description: redis工具类，简化value、hash数据类型的set、get方法
  * 内部使用jackson进行对象的序列化和反序列化
+ * 由于Jackson2JsonRedisSerializer对于复杂泛型实体,会将泛型元素转为LinkedHashMap,导致反序列化是报错:LinkedHashMap cannot be cast to XX
+ * 因此需要额外使用JacksonUtil对得到了Object进行实体类转化
  * @date 2021/7/6 15:07
  */
 
@@ -33,7 +35,7 @@ public class RedisUtil {
 	private ValueOperations<String, Object> valueOperations;
 
 	//单位默认使用 s,默认1天
-	public static final long DEFAULT_TIME_OUT = 24 * 60 * 10;
+	public static final long DEFAULT_TIME_OUT = 24 * 60 * 60;
 
 	public static final long NOT_TIME_OUT = -1;
 
@@ -85,14 +87,13 @@ public class RedisUtil {
 	/**
 	 * 获取hash值,指定泛型,转为List集合
 	 */
-	public <T> List<T> getHashObjectList(String key, Class<T> clazz) throws IOException {
-		Object o = valueOperations.get(key);
-		//object为json序列化的字符串,需要进一步反序列化为对象
+	public <T> List<T> getHashObjectList(String key,String hashKey, Class<T> clazz) throws IOException {
+		Object o = hashOperations.get(key,hashKey);
+		//object为json反序列化为Object的结果,需要进一步转化为实体类
 		if (null == o) {
 			return null;
 		}
-		String jsonStr = JacksonUtil.toJsonStr(o);
-		return JacksonUtil.toList(jsonStr, clazz);
+		return JacksonUtil.objectToList(o, clazz);
 	}
 
 	/**
@@ -119,7 +120,7 @@ public class RedisUtil {
 	 */
 	public <T> T getObject(String key, Class<T> clazz) throws IOException {
 		Object o = valueOperations.get(key);
-		//object为json序列化的字符串,需要进一步反序列化为对象
+		//object为json反序列化为Object的结果,需要进一步转化为实体类
 		if (null == o) {
 			return null;
 		}
@@ -131,12 +132,11 @@ public class RedisUtil {
 	 */
 	public <T> List<T> getObjectList(String key, Class<T> clazz) throws IOException {
 		Object o = valueOperations.get(key);
-		//object为json序列化的字符串,需要进一步反序列化为对象
+		//object为json反序列化为Object的结果,需要进一步转化为实体类
 		if (null == o) {
 			return null;
 		}
-		String jsonStr = JacksonUtil.toJsonStr(o);
-		return JacksonUtil.toList(jsonStr, clazz);
+		return JacksonUtil.objectToList(o, clazz);
 	}
 
 

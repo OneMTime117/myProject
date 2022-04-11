@@ -1,7 +1,7 @@
 package com.yh.system.domain.dto.user;
 
 import com.yh.common.domain.dto.BaseDTO;
-import com.yh.system.domain.enums.SexEnum;
+import com.yh.system.domain.entity.sys.SysRole;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -53,14 +53,18 @@ public class UserInfoDTO extends BaseDTO {
 	/**
 	 * 性别 0未知 1男 2女
 	 */
-//	private Integer sex;
 	@ApiModelProperty(value = "性别0未知1男2女", required = true)
-	private SexEnum sex;
+	private Integer sex;
 
 	/**
 	 * 生日
 	 */
-//	@JsonFormat(pattern = "yyyy-MM-dd")
 	@ApiModelProperty(value = "生日", required = true)
 	private LocalDate birthday;
+
+	private String roleId;
+
+	private SysRole sysRole;
+
+	private String token;
 }

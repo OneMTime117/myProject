@@ -5,12 +5,11 @@ import com.yh.common.domain.dto.BaseDateDTO;
 import com.yh.common.domain.dto.CommonDateDTO;
 import com.yh.common.exception.BusinessException;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * JDK日期、时间 api工具类
@@ -184,5 +183,76 @@ public class LocalDateTimeUtil {
             }
         }
         return true;
+    }
+
+    /**
+     * 获取今年目前各月份月末（不能大于当前月份）
+     */
+    public static List<LocalDateTime> eachMonthEndTime() {
+        List<LocalDateTime> arrayList = new ArrayList<>();
+        LocalDateTime now = LocalDateTime.now();
+        for (int i = 1; i <= now.getMonth().getValue(); i++) {
+            LocalDateTime monthEndTime = LocalDateTime.of(LocalDate.now(), END_TIME).withMonth(i).with(TemporalAdjusters.lastDayOfMonth());
+            arrayList.add(monthEndTime);
+        }
+        return arrayList;
+    }
+
+    /**
+     * 获取今年年初
+     */
+    public static LocalDateTime firstDayOfYear() {
+        return LocalDateTime.of(LocalDate.now(), LocalDateTimeUtil.START_TIME).with(TemporalAdjusters.firstDayOfYear());
+    }
+
+
+    /**
+     * 获取今月月初
+     */
+    public static LocalDateTime firstDayOfMonth() {
+        return LocalDateTime.of(LocalDate.now(), LocalDateTimeUtil.START_TIME).with(TemporalAdjusters.firstDayOfMonth());
+    }
+
+    /**
+     * 计算指定时间到当前时间差(分)
+     */
+    public static String diffNow(LocalDateTime before) {
+        Duration between = Duration.between(before, LocalDateTime.now());
+        return between.toMinutes() + "";
+    }
+
+    /**
+     * 获取今年12各月起止时间
+     */
+    public static List<BaseDateDTO> toYearEachMonth() {
+        List<BaseDateDTO> resultList = new ArrayList<>();
+        LocalDate now = LocalDate.now();
+        for (int i = 1; i <= 12; i++) {
+            LocalDate startLocalDate = now.withMonth(i).with(TemporalAdjusters.firstDayOfMonth());
+            LocalDate endLocalDate = now.withMonth(i).with(TemporalAdjusters.lastDayOfMonth());
+            BaseDateDTO baseDateDTO = new BaseDateDTO();
+            baseDateDTO.setStartDate(LocalDateTime.of(startLocalDate, START_TIME));
+            baseDateDTO.setEndDate(LocalDateTime.of(endLocalDate, END_TIME));
+            resultList.add(baseDateDTO);
+        }
+        return resultList;
+    }
+
+
+    /**
+     * @description: 获取前N月到现在区间，各月起止时间
+     */
+    public static List<BaseDateDTO> eachMonthBeforeMonth(int month) {
+        List<BaseDateDTO> resultList = new ArrayList<>();
+        LocalDate now = LocalDate.now();
+        for (int i = month; i >= 0; i--) {
+            LocalDate startLocalDate = now.minusMonths(i).with(TemporalAdjusters.firstDayOfMonth());
+            LocalDate endLocalDate = now.minusMonths(i).with(TemporalAdjusters.lastDayOfMonth());
+            BaseDateDTO baseDateDTO = new BaseDateDTO();
+            baseDateDTO.setStartDate(LocalDateTime.of(startLocalDate, START_TIME));
+            baseDateDTO.setEndDate(LocalDateTime.of(endLocalDate, END_TIME));
+            resultList.add(baseDateDTO);
+        }
+        return resultList;
     }
 }

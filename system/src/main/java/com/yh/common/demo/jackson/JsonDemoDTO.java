@@ -1,16 +1,10 @@
 package com.yh.common.demo.jackson;
 
-import cn.hutool.json.JSONUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
-import org.aspectj.util.FileUtil;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 @ToString

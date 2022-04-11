@@ -3,6 +3,21 @@ server:
   servlet:
     context-path: /system
 
+#使用Http暴露所有actuator端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" #*为关键字,因此需要使用双引号包装
+  endpoint:
+    health:
+      show-details: always
+
+info:
+  name: system
+  author: yh
+
+
 spring:
   application:
     name: system
@@ -12,7 +27,29 @@ spring:
     multipart:
       max-request-size: 1024MB
       max-file-size: 1024MB
+  devtools:
+    restart:
+      enabled: true
+      #静态资源热部署
+      additional-paths: resurces/static/**
+    livereload:
+      enabled: false
+  #mail
+  mail:
+    protocol: smtp
+    host: smtp.qq.com
+    username: 756116832@qq.com
+    #邮箱授权码
+    password: nxdoxrvkdbssbfbh
+    #开启ssl安全协议,此时SMTP服务器端口将为465
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
 
+
+#微服务配置
 eureka:
   client:
     #作为客户端，不进行服务注册、服务发现
@@ -28,8 +65,6 @@ eureka:
 #mybatisPlus配置
 mybatis-plus:
   type-enums-package: com.yh.system.domain.enums
-
-
 
 
 

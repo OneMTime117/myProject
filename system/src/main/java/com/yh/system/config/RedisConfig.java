@@ -25,6 +25,7 @@ public class RedisConfig {
 		return redisTemplate;
 	}
 
+
 	/**
 	 * 实例化 HashOperations 对象,可以使用 Hash 类型操作
 	 *

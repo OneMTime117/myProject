@@ -25,7 +25,7 @@ public class BaseEntity {
 	/**
 	 * 最后修改人
 	 */
-	@TableField(value = "last_modified_by", fill = FieldFill.UPDATE)
+	@TableField(value = "last_modified_by", fill = FieldFill.INSERT_UPDATE)
 	private String lastModifiedBy;
 
 	/**
@@ -37,7 +37,7 @@ public class BaseEntity {
 	/**
 	 * 最后修改时间
 	 */
-	@TableField(value = "last_modified_date", fill = FieldFill.UPDATE)
+	@TableField(value = "last_modified_date", fill = FieldFill.INSERT_UPDATE)
 	private LocalDateTime lastModifiedDate;
 
 	/**

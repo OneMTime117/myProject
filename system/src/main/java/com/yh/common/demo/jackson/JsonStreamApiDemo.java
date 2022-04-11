@@ -7,7 +7,6 @@ import com.fasterxml.jackson.core.JsonToken;
 
 import java.io.IOException;
 import java.io.StringWriter;
-import java.util.Objects;
 
 public class JsonStreamApiDemo {
 

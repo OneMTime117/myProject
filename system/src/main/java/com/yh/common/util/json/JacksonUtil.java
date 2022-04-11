@@ -22,6 +22,7 @@ public class JacksonUtil {
 	 * 将对象转换为jsonStr
 	 */
 	public static String toJsonStr(Object object) throws JsonProcessingException {
+
 		return OBJECT_MAPPER.writeValueAsString(object);
 	}
 
@@ -48,6 +49,12 @@ public class JacksonUtil {
 	//将被Jackson处理得到的Object对象，转化为实体类
 	public static <T> T objectToBean(Object obj, Class<T> clazz) {
 		return OBJECT_MAPPER.convertValue(obj, clazz);
+	}
+
+	//将被Jackson处理得到的Object对象,转化为List<T>
+	public static <T> List<T> objectToList(Object obj, Class<T> clazz) {
+		JavaType javaType = OBJECT_MAPPER.getTypeFactory().constructParametricType(List.class, clazz);
+		return OBJECT_MAPPER.convertValue(obj, javaType);
 	}
 
 }

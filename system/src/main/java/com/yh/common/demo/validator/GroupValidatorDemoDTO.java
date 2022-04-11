@@ -3,7 +3,6 @@ package com.yh.common.demo.validator;
 import com.yh.common.validator.group.ValidationGroups;
 import lombok.Data;
 
-import javax.validation.Validation;
 import javax.validation.constraints.NotBlank;
 
 @Data

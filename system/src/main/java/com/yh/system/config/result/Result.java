@@ -42,4 +42,17 @@ public class Result {
 		result.msg = msg;
 		return new ResponseEntity(result, HttpStatus.OK);
 	}
+
+	public static ResponseEntity unauthorized() {
+		Result result = new Result();
+		result.code = HttpStatus.UNAUTHORIZED.value();//401
+		return new ResponseEntity(result, HttpStatus.OK);
+	}
+
+	public static ResponseEntity unauthorized(String msg) {
+		Result result = new Result();
+		result.code = HttpStatus.UNAUTHORIZED.value();//401
+		result.msg = msg;
+		return new ResponseEntity(result, HttpStatus.OK);
+	}
 }

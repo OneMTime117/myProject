@@ -27,10 +27,10 @@ import java.util.stream.Collectors;
 @Service
 public class SysFileInfoServiceImpl extends ServiceImpl<SysFileInfoMapper, SysFileInfo> implements SysFileInfoService {
 
-	@Value("${fileUpload.domain}")
+	@Value("${file-upload.domain}")
 	private String domain;
 
-	@Value("${fileUpload.dir}")
+	@Value("${file-upload.dir}")
 	private String dir;
 
 

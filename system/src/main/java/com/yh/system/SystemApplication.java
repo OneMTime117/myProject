@@ -5,14 +5,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-
-@ServletComponentScan("com.yh")
+@EnableAspectJAutoProxy
 @EnableEurekaClient
-@SpringBootApplication(scanBasePackages = "com.yh")//保证common包下的Bean被扫描
+@ServletComponentScan("com.yh")
 @MapperScan(basePackages = {"com.yh.system.mapper"})
 @EnableTransactionManagement
+@SpringBootApplication(scanBasePackages = "com.yh")//保证common包下的Bean被扫描
 public class SystemApplication {
 
 	public static void main(String[] args) {

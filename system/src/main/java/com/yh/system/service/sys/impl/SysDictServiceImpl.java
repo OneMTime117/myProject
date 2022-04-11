@@ -35,4 +35,6 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
 		}
 		return sysDictDTOS;
 	}
+
+
 }

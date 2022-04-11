@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "scheduling.enabled",
+      "type": "java.lang.String",
+      "description": "是否开启springboot任务模块"
+    }
+  ] }

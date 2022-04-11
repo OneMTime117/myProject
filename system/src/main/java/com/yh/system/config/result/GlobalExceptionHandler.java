@@ -58,24 +58,6 @@ public class GlobalExceptionHandler {
 		return Result.error("请求参数错误，请输入正确的参数");
 	}
 
-	//自定义异常
-
-	/**
-	 * 身份授权异常
-	 */
-	@ExceptionHandler(AuthenticationAccessException.class)
-	public ResponseEntity handleException(AuthenticationAccessException e) {
-		return Result.error("身份授权错误");
-	}
-
-	/**
-	 * 业务异常
-	 */
-	@ExceptionHandler(BusinessException.class)
-	public ResponseEntity handleException(BusinessException e) {
-		return Result.error(e.getMessage());
-	}
-
 	// BeanValidation参数校验异常
 	/*
 	 * @RequestBody Bean约束校验异常
@@ -103,6 +85,23 @@ public class GlobalExceptionHandler {
 	public ResponseEntity handleConstraintViolation(ConstraintViolationException e) {
 		String message = e.getConstraintViolations().stream().map(ConstraintViolation::getMessage).collect(Collectors.joining(","));
 		return Result.error(message);
+	}
+
+	//自定义异常
+	/**
+	 * 身份授权异常
+	 */
+	@ExceptionHandler(AuthenticationAccessException.class)
+	public ResponseEntity handleException(AuthenticationAccessException e) {
+		return Result.unauthorized(e.getMessage());
+	}
+
+	/**
+	 * 业务异常
+	 */
+	@ExceptionHandler(BusinessException.class)
+	public ResponseEntity handleException(BusinessException e) {
+		return Result.error(e.getMessage());
 	}
 
 	/**

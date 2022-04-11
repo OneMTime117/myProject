@@ -41,4 +41,6 @@ public class SysDictController {
 		List<SysDictDTO> sysDictDTOS = sysDictService.listFieldByDictCode(dictCode);
 		return Result.ok(sysDictDTOS);
 	}
+
+
 }

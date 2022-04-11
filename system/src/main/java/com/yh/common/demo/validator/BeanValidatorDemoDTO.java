@@ -3,7 +3,6 @@ package com.yh.common.demo.validator;
 import com.yh.common.validator.constraint.PhoneNumber;
 import com.yh.common.validator.constraint.Sex;
 import lombok.Data;
-import org.hibernate.validator.constraints.ParameterScriptAssert;
 import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.*;

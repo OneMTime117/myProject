@@ -2,20 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yh.system.mapper.sys.SysRoleMapper">
   <resultMap id="BaseResultMap" type="com.yh.system.domain.entity.sys.SysRole">
-    <!--@mbg.generated-->
-    <!--@Table sys_role-->
-    <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
-    <result column="last_modified_by" jdbcType="VARCHAR" property="lastModifiedBy" />
-    <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
-    <result column="last_modified_date" jdbcType="TIMESTAMP" property="lastModifiedDate" />
-    <result column="deleted" jdbcType="TINYINT" property="deleted" />
-    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
-    <result column="description" jdbcType="VARCHAR" property="description" />
+      <!--@mbg.generated-->
+      <!--@Table sys_role-->
+      <id column="id" jdbcType="VARCHAR" property="id"/>
+      <result column="created_by" jdbcType="VARCHAR" property="createdBy"/>
+      <result column="last_modified_by" jdbcType="VARCHAR" property="lastModifiedBy"/>
+      <result column="created_date" jdbcType="TIMESTAMP" property="createdDate"/>
+      <result column="last_modified_date" jdbcType="TIMESTAMP" property="lastModifiedDate"/>
+      <result column="deleted" jdbcType="TINYINT" property="deleted"/>
+      <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
+      <result column="description" jdbcType="VARCHAR" property="description"/>
   </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    id, created_by, last_modified_by, created_date, last_modified_date, deleted, role_name, 
-    description
-  </sql>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, created_by, last_modified_by, created_date, last_modified_date, deleted, role_name,
+        description
+    </sql>
+
+    <select id="listPage" resultMap="BaseResultMap">
+        select *
+        from sys_role
+        order by id asc
+    </select>
 </mapper>

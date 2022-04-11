@@ -6,9 +6,11 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @ApiModel
 @Data
-public class SysDictDTO extends BaseDTO {
+public class SysDictDTO extends BaseDTO implements Serializable {
 	/**
 	 * 字典名称
 	 */
@@ -50,4 +52,6 @@ public class SysDictDTO extends BaseDTO {
 	@ApiModelProperty("字段值备用")
 	@TableField(value = "FIELD_VALUE_BACKUP")
 	private String fieldValueBackup;
+
+
 }

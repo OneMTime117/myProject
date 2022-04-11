@@ -8,8 +8,10 @@ import com.baomidou.mybatisplus.core.injector.ISqlInjector;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.BlockAttackInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
+import com.yh.common.util.UserInfoUtil;
 import com.yh.system.config.sqlinjector.MySqlInjector;
 import org.apache.ibatis.reflection.MetaObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,6 +19,9 @@ import java.time.LocalDateTime;
 
 @Configuration
 public class MybatisPlusConfig {
+
+	@Autowired
+	private UserInfoUtil userInfoUtil;
 
 	//添加mybatisPlus内置插件（拦截器）
 	@Bean
@@ -59,12 +64,19 @@ public class MybatisPlusConfig {
 			public void insertFill(MetaObject metaObject) {
 				//新增时，添加createdDate，createdBy字段数据
 				this.strictInsertFill(metaObject, "createdDate", LocalDateTime.class, LocalDateTime.now());
+				this.strictInsertFill(metaObject, "createdBy", String.class, userInfoUtil.getUserInfo().getId());
+
+				this.strictInsertFill(metaObject, "lastModifiedDate", LocalDateTime.class, LocalDateTime.now());
+				this.strictInsertFill(metaObject, "lastModifiedBy", String.class, userInfoUtil.getUserInfo().getId());
+
 			}
 
 			@Override
 			public void updateFill(MetaObject metaObject) {
 				//修改时，添加lastModifiedDate、lastModifiedBy字段数据
 				this.strictUpdateFill(metaObject, "lastModifiedDate", LocalDateTime.class, LocalDateTime.now());
+				this.strictUpdateFill(metaObject, "lastModifiedBy", String.class, userInfoUtil.getUserInfo().getId());
+
 			}
 		};
 	}

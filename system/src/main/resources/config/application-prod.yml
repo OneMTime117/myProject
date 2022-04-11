@@ -23,11 +23,12 @@ swagger:
 scheduling:
   enabled: false
 
-#websocket时候开启(如果使用外部tomcat,则默认开启)
+#websocket模块配置(如果使用外部tomcat,则需要关闭)
 websocket:
   enabled: true
 
 #文件服务器
-fileUpload:
+file-upload:
   domain: http://localhost:80/download/
   dir: D://data/
+
